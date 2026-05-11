@@ -127,20 +127,11 @@ vector<int> compute_schedule(vector<Job> jobs) {
 
 ## Alternate Algorithm
 
-There is a simpler greedy algorithm to solve this problem.
+There is a simpler greedy algorithm to solve this problem. First, sort the jobs by their deadlines in non-decreasing order. We will maintain a set of selected jobs, ordered by their durations (using a data structure like a set or priority queue to quickly access the job with the maximum duration). Initially, the total scheduled time is set to 0.
 
-- Sort the jobs by their deadlines in non-decreasing order.
-- We will maintain a set of selected jobs, ordered by their durations (using a data structure like a set or priority queue to quickly access the job with the maximum duration).
-- Initialize the total scheduled time to 0.
+Then, we process each job in order of their non-decreasing deadlines. For each job, we add its duration to the total scheduled time and insert the job into the set. If the total scheduled time exceeds the job's deadline, we remove the job with the longest duration from the set (which may be the current job itself), and subtract its duration from the total time.
 
-- For each job in order of non-decreasing deadlines:
-    - Add the job's duration to the total scheduled time.
-    - Insert the job into the set.
-    - If the total scheduled time exceeds the job's deadline, remove the job with the longest duration from the set (which may be the current job itself), and subtract its duration from the total time.
-
-After processing all jobs, the set contains the maximum number of jobs that can be scheduled without violating any deadlines. The jobs should be executed in the order of their deadlines to ensure they meet their deadlines.
-
-The running time of this algorithm is also $O(n \log n)$.
+After processing all jobs, the set contains the maximum number of jobs that can be scheduled without violating any deadlines. The jobs should be executed in the order of their deadlines to ensure they meet their deadlines. The running time of this algorithm is also $O(n \log n)$.
 
 ## Correctness Proof
 
